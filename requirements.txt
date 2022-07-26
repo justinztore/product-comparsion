@@ -1,0 +1,7 @@
+scrapy
+BeautifulSoup4
+lxml
+html5lib
+xmltodict
+pymongo
+pymongo[srv]
