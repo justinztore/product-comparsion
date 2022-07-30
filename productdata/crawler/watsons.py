@@ -2,6 +2,7 @@ import bs4
 import json
 import xmltodict
 import requests
+import time
 
 def custom_header():
     """網頁瀏覽時, 所帶的 request header 參數, 模仿瀏覽器發送 request"""
@@ -65,6 +66,8 @@ def scrapySubCategory(url):
     del header["Host"]
     del header["Origin"]
     del header["Referer"]
+
+    time.sleep(2)
 
     response = requests.get(url, headers=header)
 

@@ -1,5 +1,3 @@
-
-
 [[source]]
 url = "https://pypi.org/simple"
 verify_ssl = true
@@ -13,10 +11,11 @@ celery = "==5.0.5"
 loguru = "==0.5.3"
 sqlalchemy = "==1.3.23"
 pymysql = "==1.0.2"
-BeautifulSoup4
-lxml
-html5lib
-xmltodict
+beautifulsoup4 = "==4.11.1"
+lxml = "==4.9.1"
+html5lib = "==1.1"
+xmltodict = "==0.13.0"
+
 [dev-packages]
 
 [requires]
