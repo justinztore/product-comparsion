@@ -22,8 +22,8 @@ deploy-mysql:
 	docker stack deploy -c mysql.yml mysql
 
 # 安裝相對應的 package
-install-package:
-	pipenv sync
+# install-package:
+# 	pipenv sync
 
 # 建立 dev 環境變數
 gen-dev-env-variable:
