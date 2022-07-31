@@ -1,13 +1,18 @@
 # Initial the project
 
+## install the following package in local python environemnt 
+```
+pip install pipenv
+```
+
 ## create a virtual environment insdie the project 
 ```
-python -m venv .venv
+pipenv install
 ```
 
 ## change to the virtual environment
 ```
-source /Users/justinkwok/Documents/GitHub/product-comparsion/.venv/bin/activate
+pipenv shell
 ```
 
 ## install the package
@@ -38,7 +43,7 @@ make deploy-rabbitmq
 make create-network
 ```
 
-## srat mysql
+## start mysql
 ```
 make create-mysql-volume
 make deploy-mysql

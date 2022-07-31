@@ -106,10 +106,6 @@ def scrapySubCategory(url):
     
     print(categories_list)
 
-def crawler():
-    
+def crawler(parameters):
+    print("pass in parameters : {parameters}")
     scrapyCategory()
-
-    return
-
-crawler()
