@@ -18,6 +18,7 @@ lxml = "==4.9.1"
 html5lib = "==1.1"
 xmltodict = "==0.13.0"
 productdata = {editable = true, path = "."}
+apscheduler = "*"
 
 [dev-packages]
 

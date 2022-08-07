@@ -3,6 +3,8 @@ import json
 import xmltodict
 import requests
 import time
+import pandas as pd
+from datetime import datetime
 
 def custom_header():
     """網頁瀏覽時, 所帶的 request header 參數, 模仿瀏覽器發送 request"""
@@ -30,22 +32,30 @@ def scrapyCategory():
     categories = soup.find_all('e2-navigation-tab')
 
     categories_list = []
-    categories_url = []
+    data = pd.DataFrame()
     for cat in categories:
         cat_link = cat.find('a', href=True)
 
         if cat_link is not None:
-            categories_list.append({'category': cat.text.strip(), 'name': cat.text.strip(), 'url': cat_link['href']})
+            # categories_list.append({'category': cat.text.strip(), 'name': cat.text.strip(), 'url': f"{url}{cat_link['href']}"})
             url_parts = cat_link['href'].split('/')
-            # print(url_parts[-1], ' : ', str.isnumeric(url_parts[-1]))
+
             if str.isnumeric(url_parts[-1]) == True:
                 new_url = category_api.replace('CATEGORY_ID', url_parts[-1])
                 # print(new_url)
                 ## loop sub category
-                scrapySubCategory(new_url)
+                temp = scrapySubCategory(new_url)
+                categories_list = categories_list + temp
                 
         else:
             print('No hyperlink')
+    
+    data = pd.DataFrame(categories_list)
+    print('-------------------------')
+    # print(data)
+    print('=========================')
+
+    return data
     
 
 def scrapySubCategory(url):
@@ -75,23 +85,18 @@ def scrapySubCategory(url):
         xmlresponse = xmltodict.parse(response.text)
         res = xmlresponse['elabCategoryTree']
     else:
-        print(response.text)
+        # print(response.text)
         jsonresponse = json.loads(response.text)
         res = jsonresponse
+
+    now = datetime.now()
 
     for categories in res['secondLevelLinks']:
         if 'childList' in categories:
             for cat in categories['childList']:
                 if 'linkName' in cat and 'url' in cat:
                     try:
-                        categories_list.append({'category': cat['linkName'].strip(), 'name': cat['linkName'].strip(), 'url': cat['url']})
-                        # print(categories_list)
-                        # item = CategoryItem()
-                        # item['category'] = cat['linkName'].strip()
-                        # item['name'] = cat['linkName'].strip()
-                        # item['url'] = cat['url']
-
-                        # yield item
+                        categories_list.append({'type' : 'category', 'platform' : 'watsons', 'name': cat['linkName'].strip(), 'url': cat['url'], 'updated_at' : now.strftime("%Y-%m-%d %H:%M:%S")})
                     except OSError as err:
                         print("OS error: {0}".format(err))
                     except ValueError:
@@ -104,8 +109,10 @@ def scrapySubCategory(url):
                 else:
                     print(cat)
     
-    print(categories_list)
+    # data = pd.DataFrame(categories_list)
+
+    return categories_list
 
 def crawler(parameters):
-    print("pass in parameters : {parameters}")
-    scrapyCategory()
+    print(f"pass in parameters : {parameters}")
+    return scrapyCategory()

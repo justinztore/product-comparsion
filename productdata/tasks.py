@@ -1,9 +1,10 @@
 import importlib
 import typing
 
-from productdata.worker import app
+from productdata import db
+from productdata.worker import app, CallbackTask
 
-@app.task()
+@app.task(base=CallbackTask)
 def crawler(dataset, parameters):
     # using getattr and importlib
     # according to sifferent data set to use different crawler to get data
@@ -15,5 +16,11 @@ def crawler(dataset, parameters):
     ) (parameters=parameters)
 
     print(df)
+
+    table = 'schedule_task'
+    if parameters['dataset'] == 'watsons_product':
+        table = 'products'
+
+    db.upload_data(df, table, db.router.mysql_productdata_conn)
 
     print("call crawler success")
