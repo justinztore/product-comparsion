@@ -102,8 +102,6 @@ def scrapySubCategory(url):
                     except ValueError:
                         print("Could not convert data to an integer.")
                     except BaseException as err:
-                        print(1234567890)
-                        print(cat)
                         print(f"Unexpected {err=}, {type(err)=}")
                         raise
                 else:

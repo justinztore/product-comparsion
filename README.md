@@ -62,5 +62,5 @@ pipenv run python productdata/producer.py watsons_category
 
 ## Scrape watsons category
 ```
-pipenv run python productdata/producer.py watsons_category 
+pipenv run python productdata/producer.py watsons_product
 ```

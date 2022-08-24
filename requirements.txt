@@ -11,3 +11,5 @@ beautifulsoup4==4.11.1
 lxml==4.9.1
 html5lib==1.1
 xmltodict==0.13.0
+mysqlclient==2.1.1
+mysql-connector-python==8.0.30

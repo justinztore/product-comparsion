@@ -1,0 +1,59 @@
+Justin Kwok11:53 pmiframe 用唔到POSt我改成甘
+API :
+
+VIP checking
+    Url: https://api.ztore.com/api/callCenter/validMembership?user_sn=
+    Type: GET
+
+    Response <json>:
+    {
+        result : 1 // 1=True, 0=False
+    }
+
+Order number checking
+    Url: https://api.ztore.com/api/callCenter/validOrder?order_sn=
+    Type: GET
+    
+    Response <json>:
+    {
+        result : 1 // 1=Exist, 0=Not Exist
+    }
+
+iframe URL:
+
+Screen pop URL
+    Url: https://api.ztore.com/api/callCenter/information?mobile=xxxxxxx&order_sn=xxxxxxx
+
+    for mobile:
+        pass in the call in mobile number
+
+    for order sn: 
+        case 1 : if user not choose order service, left order_sn blank
+        case 2 : if user choose order service but input wrong order sn, left order_sn blank
+        case 3 : if user choose order service and input correct order sn, pass in order_sn 
+
+    for popup screen display:
+        case 1 : 
+                mobile number : exist                
+                order_sn :      not empty and correct                  
+                => display user info and display order info.
+        case 2 : 
+                mobile number : exist
+                order_sn :      not empty but incorrect
+                => display user info only
+        case 3 :
+                mobile number : exist
+                order_sn :      empty
+                => display user info only
+        case 4 :
+                mobile number : not exist
+                order_sn :      not empty and correct 
+                => display order info. only
+        case 5 :
+                mobile number : not exist
+                order_sn :      not empty but incorrect
+                => display none
+        case 6 :
+                mobile number : not exist
+                order_sn :      empty
+                => display none

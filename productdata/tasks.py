@@ -18,7 +18,7 @@ def crawler(dataset, parameters):
     print(df)
 
     table = 'schedule_task'
-    if parameters['dataset'] == 'watsons_product':
+    if parameters['dataset'] == 'watsons_product' or parameters['dataset'] == 'hktvmall_product':
         table = 'products'
 
     db.upload_data(df, table, db.router.mysql_productdata_conn)

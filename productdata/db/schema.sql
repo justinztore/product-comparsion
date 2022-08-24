@@ -38,6 +38,7 @@ CREATE TABLE `ProductData`.`schedule_task` (
   `start_page` INT NULL,
   `end_page` INT NULL,
   `updated_at` DATETIME NULL,
+  `in_queue` INT NOT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -56,7 +57,8 @@ CHANGE COLUMN `updated_at` `updated_at` DATETIME NOT NULL ;
 -- 資料表 `product`
 --
 CREATE TABLE `ProductData`.`products` (
-  `code` VARCHAR(45) NOT NULL,
+  `id` INT NOT NULL,
+  `code` VARCHAR(100) NOT NULL,
   `platform` VARCHAR(45) NOT NULL,
   `product_code` VARCHAR(45) NOT NULL,
   `category_code` VARCHAR(45) NOT NULL,
@@ -68,7 +70,13 @@ CREATE TABLE `ProductData`.`products` (
   `price` DECIMAL(10,2) NOT NULL,
   `promotion_tag` VARCHAR(255) NULL,
   `review_avg_rating` DECIMAL(4,2) NULL,
-  `url` VARCHAR(255) NOT NULL,
+  `url` TEXT NOT NULL,
   `image` TEXT NULL,
   `updated_at` DATETIME NOT NULL,
-  PRIMARY KEY (`code`));
+  PRIMARY KEY (`id`));
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `products`
+--
+ALTER TABLE `ProductData`.`products` 
+CHANGE COLUMN `id` `id` INT NOT NULL AUTO_INCREMENT

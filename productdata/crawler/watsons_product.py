@@ -4,6 +4,7 @@ import requests
 import time
 import pandas as pd
 from datetime import datetime
+from random import randint
 
 def custom_header():
     """網頁瀏覽時, 所帶的 request header 參數, 模仿瀏覽器發送 request"""
@@ -96,13 +97,18 @@ def crawler(parameters):
     print('totalPages: ', totalPages)
 
     products_list = getProductDetail(products_list, products, category_code)
+    time.sleep( 2 )
 
     if(totalPages > 1):
         current_page = 1
         while totalPages > current_page:
-            cp, tp, p = scrapProduct(category_code, current_page)
+            sleep_secs = randint(1,3)
+            print(f'---- Current Page {current_page}, sleep {sleep_secs} ----')
             
+            cp, tp, p = scrapProduct(category_code, current_page)
             products_list = getProductDetail(products_list, products, category_code)
+            time.sleep( sleep_secs )
+
             current_page = current_page + 1
 
     # print(products_list)

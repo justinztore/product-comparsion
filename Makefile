@@ -36,3 +36,9 @@ gen-staging-env-variable:
 # 建立 release 環境變數
 gen-release-env-variable:
 	VERSION=RELEASE python genenv.py
+
+run-worker-watsons:
+	pipenv run celery -A productdata.worker worker --loglevel=info --concurrency=1  --hostname=%h -Q watsons
+
+run-worker-hktvmall:
+	pipenv run celery -A productdata.worker worker --loglevel=info --concurrency=1  --hostname=%h -Q hktvmall
