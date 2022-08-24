@@ -31,7 +31,7 @@ def get_cokkies():
 
 def custom_header():
     # JSESSIONID, LBI = get_cokkies()
-    JSESSIONID, LBI = '5E95A3A4DFF641B9A3A33E7438BD7AF5', -159110788
+    JSESSIONID, LBI = '4FA8109F2106A924D302740D45A27955', -159110788
 
     """網頁瀏覽時, 所帶的 request header 參數, 模仿瀏覽器發送 request"""
     return {
@@ -113,15 +113,16 @@ def getProductDetail(products_list, products, category_code):
 
 
 def scrapProduct(category_code, current_page):
-    url = 'https://www.hktvmall.com/hktv/zh/ajax/search_products?'
+    url = 'https://www.hktvmall.com/hktv/zh/ajax/search_products'
 
     parameters = {
         'query': ':relevance:street:main:category:AA16050000000:',
+        #'query': '"":relevance:category:AA16050000000:zone:beautynhealth:street:main:',
         'currentPage': 0,
         'pageSize': 60,
         'pageType': 'searchResult',
         'categoryCode': 'AA16050000000',
-        'CSRFToken': '243c9e47-1af8-4854-8a85-dbc1203d2b0b'
+        'CSRFToken': '112046bb-b84a-44a1-8c1c-4492c52fb8d0'
     }
 
     # for pam in parameters:

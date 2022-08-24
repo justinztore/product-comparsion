@@ -17,6 +17,7 @@ beautifulsoup4 = "==4.11.1"
 lxml = "==4.9.1"
 html5lib = "==1.1"
 xmltodict = "==0.13.0"
+PyMySQL = "==1.0.2"
 productdata = {editable = true, path = "."}
 apscheduler = "*"
 

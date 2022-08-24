@@ -7,6 +7,8 @@ from datetime import datetime
 from random import randint
 
 def custom_header():
+    JSESSIONID, LBI = '5E95A3A4DFF641B9A3A33E7438BD7AF5', -159110788
+
     """網頁瀏覽時, 所帶的 request header 參數, 模仿瀏覽器發送 request"""
     return {
         "Accept": "application/json, text/javascript, */*; q=0.01",
@@ -14,7 +16,7 @@ def custom_header():
         "Accept-Language": "en-US,en;q=0.9,zh-CN;q=0.8,zh-TW;q=0.7,zh;q=0.6",
         "Connection": "keep-alive",
         "Content-Length": "186",
-        "Cookie": "ott-uuid=8d5ca6b9-9880-4c11-9041-df43b58ccd94; device-type=desktop-web; _fbp=fb.1.1661006563162.1661875918; _ALGOLIA=anonymous-ed651703-3681-45ae-be13-86ab92660dd4; _gid=GA1.2.332039707.1661006563; _ga=GA1.2.1834688676.1661006563; JSESSIONID=E8BFFDAB750B6CE3267010B7BD6EACE9; LBI=-159110788; _gat_UA-55283480-1=1; _gat_UA-68175808-1=1; _ga_3NCT4DYDM1=GS1.1.1661184936.8.0.1661184936.0.0.0",
+        "Cookie": f"ott-uuid=8d5ca6b9-9880-4c11-9041-df43b58ccd94; device-type=desktop-web; _fbp=fb.1.1661006563162.1661875918; _ALGOLIA=anonymous-ed651703-3681-45ae-be13-86ab92660dd4; _gid=GA1.2.332039707.1661006563; LBI={LBI}; JSESSIONID={JSESSIONID}; _ga_3NCT4DYDM1=GS1.1.1661322165.11.1.1661322166.0.0.0; _ga=GA1.1.1834688676.1661006563",
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
         "Host": "www.hktvmall.com",
         "Origin": "https://www.hktvmall.com",
@@ -87,12 +89,13 @@ def scrapProduct(category_code, current_page):
     url = 'https://www.hktvmall.com/hktv/zh/ajax/search_products?'
 
     parameters = {
-        'query': f':relevance:street:main:category:{category_code}:',
+        #'query': f':relevance:street:main:category:{category_code}:',
+        'query': f'"":relevance:category:{category_code}:zone:beautynhealth:street:main:',
         'currentPage': current_page,
         'pageSize': 60,
         'pageType': 'searchResult',
         'categoryCode': category_code,
-        'CSRFToken': '81288c20-7791-4f80-a527-1381102bd9ea'
+        'CSRFToken': '243c9e47-1af8-4854-8a85-dbc1203d2b0b'
     }
 
     response = requests.post(url, data=parameters, headers=custom_header())

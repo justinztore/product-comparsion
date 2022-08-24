@@ -73,7 +73,8 @@ def update(dataset):
             Column('url', String), 
         )
 
-        s = schedule_task.select().where(schedule_task.c.platform == 'hktvmall')
+        #s = schedule_task.select().where(schedule_task.c.platform == 'hktvmall')
+        s = schedule_task.select().where(schedule_task.c.id == 3)
         conn = db.router.mysql_productdata_conn
         result = conn.execute(s)
 
